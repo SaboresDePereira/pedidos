@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABORES DE PEREIRA</title>
+    <link rel="icon" href="TFGBHYTGRFgtt5rfgyhtertGHErthERheRthgjTkiyutyrhheT4563yetG54Tt45y65tergGFGrdGSdrg5erdFgdfthghtyjrtrfsadVdtHgdtrfhFGdgtdfdfrgyfhyjyukuOlpñPñpñOkijuhygfcdCRvtbynumunhbgTNUymNHBGNMunbghnyhtbghnjuy6t5refdvfbthrgbgg56trg65ythTyrtehRththtthtttttTTTT.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
+
+    <nav>
+        <div class="nav-container">
+            <button style="display: none;" class="nav-btn" onclick="scrollToSection('combos')">🔥 Combos</button>
+            <button class="nav-btn" onclick="scrollToSection('nuevos')">🌎 Nuevos</button>
+            <button class="nav-btn" onclick="scrollToSection('burguermenu')">🍔 Burguer Menu</button>
+            <button class="nav-btn" onclick="scrollToSection('hamburguesas')">🍔 Hamburguesas</button>
+            <button class="nav-btn" onclick="scrollToSection('hotdogs')">🌭 Completos</button>
+            <button class="nav-btn" onclick="scrollToSection('as')">🔥 As</button>
+            <button class="nav-btn" onclick="scrollToSection('churrascos')">🥪 Churrascos</button>
+            <button class="nav-btn" onclick="scrollToSection('papas')">🍟 Papas</button>
+        </div>
+    </nav>
+
+    <a href="https://wa.me/56956510930?text=Hola%20Sabores%20de%20Pereira%21%20Quisiera%20informaci%C3%B3n"
+        class="whatsapp-btn" target="_blank" title="Hablar por WhatsApp">
+        💬
+    </a>
+
+
+    <div class="overlay" id="overlay"></div>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    <div class="success-message" id="successMessage">
+        <div class="check-icon">✅</div>
+        <h3>¡Pedido Enviado!</h3>
+        <p>Tu pedido ha sido enviado por WhatsApp</p>
+    </div>
+
+    <!-- MODAL DE RESEÑAS -->
+    <div class="modal" id="reviewsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⭐ Reseñas</h2>
+                <button class="close-modal" onclick="closeReviewsModal()">✕</button>
+            </div>
+
+            <div class="review-form">
+                <h3 style="margin-top: 0;">Califica tu experiencia</h3>
+                <div class="stars-rating" id="starsRating"></div>
+                <textarea class="review-textarea" id="reviewComment" placeholder="Cuéntanos tu experiencia..."
+                    maxlength="200"></textarea>
+                <button onclick="submitReview()"
+                    style="width: 100%; margin-top: 10px; background: var(--rojo); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;">Enviar
+                    Reseña</button>
+            </div>
+
+            <h3>Reseñas de clientes</h3>
+            <div class="reviews-list" id="reviewsList"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DE HISTORIAL -->
+    <div class="modal" id="historyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Mi Historial</h2>
+                <button class="close-modal" onclick="closeHistoryModal()">✕</button>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
+    <header>
+        <img src="TFGBHYTGRFgtt5rfgyhtertGHErthERheRthgjTkiyutyrhheT4563yetG54Tt45y65tergGFGrdGSdrg5erdFgdfthghtyjrtrfsadVdtHgdtrfhFGdgtdfdfrgyfhyjyukuOlpñPñpñOkijuhygfcdCRvtbynumunhbgTNUymNHBGNMunbghnyhtbghnjuy6t5refdvfbthrgbgg56trg65ythTyrtehRththtthtttttTTTT.png"
+            alt="Sabores de Pereira">
+        <h1>SABORES DE PEREIRA</h1>
+        <p>Hamburguesas • Completos • Papas</p>
+        <div class="horario-badge" id="horarioBadge">⏰ Abierto: 17:00 - 23:00</div>
+        <p style="margin-top:6px;font-size:14px;">
+            📲 Pedidos directos por WhatsApp · Respuesta rápida
+        </p>
+
+    </header>
+
+    <div data-include="secciones/promocion.html"></div>
+
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar productos..."
+            onkeyup="filterProducts()">
+    </div>
+
+    <div
+        style="text-align: center; margin: 0 auto; width: calc(100% - 24px); max-width: 100%; padding: 0 12px; box-sizing: border-box;">
+        <button class="reviews-btn" onclick="openReviewsModal()">⭐ Ver Reseñas</button>
+        <button class="reviews-btn" onclick="openHistoryModal()"
+            style="background: linear-gradient(135deg, var(--azul), #00264d); color: white;">📋 Mi Historial</button>
+    </div>
+
+    <!-- seccion de combos -->
+    <div data-include="secciones/combos.html"></div>
+
+    <a href="admin.html">aqui</a>
+    <a href="generador-productos.html">otro aqui</a>
+    <a href="orden/index.html">ultimo aqui</a>
+
+    <!-- ================= NUEVO ================= -->
+    <div data-include="secciones/nuevos.html"></div>
+
+    <!-- ================= BURGUER MENU ================= -->
+    <div data-include="secciones/burgermenu.html"></div>
+
+    <!-- ================= HAMBURGUESAS ================= -->
+    <div data-include="secciones/hamburguesas.html"></div>
+
+    <!-- ================= CompletoS ================= -->
+    <div data-include="secciones/completos.html"></div>
+
+    <!-- ================= PAPAS FRITAS ================= -->
+    <div data-include="secciones/papasfritas.html"></div>
+
+    <!-- ================= CHURRASCOS ================= -->
+    <div data-include="secciones/churrascos.html"></div>
+
+    <!-- ================= AS ================= -->
+    <div data-include="secciones/as.html"></div>
+
+
+
+    <div id="cartBtn" onclick="toggleCart()">
+        🛒
+        <span id="cartCount"
+            style="position: absolute; top: -8px; right: -8px; background: var(--rojo); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">0</span>
+    </div>
+
+    <div id="cart">
+        <div class="cart-content">
+            <h2>Tu Pedido</h2>
+            <div id="items"></div>
+            <div class="total">Total: $<span id="total">0</span></div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                <button type="button" onclick="toggleCart()" style="background: #666;">Cerrar</button>
+                <button type="button" onclick="limpiarPedido()" style="background: var(--rojo);">Limpiar Pedido</button>
+            </div>
+
+            <form onsubmit="sendOrder(event)">
+                <div class="error" id="error"></div>
+                <input type="text" id="name" placeholder="Nombre" required autocomplete="name">
+
+                <input type="tel" id="phone" placeholder="Teléfono" required autocomplete="tel">
+
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 10px; color: #222;">Tipo de
+                        Servicio</label>
+                    <div class="options">
+                        <input type="radio" id="tipo-retiro" name="tipo" value="Retiro en local" checked>
+                        <label for="tipo-retiro" style="text-align: center; padding: 14px;">🛍️ Retiro en local</label>
+
+                        <input type="radio" id="tipo-aqui" name="tipo" value="Para consumir aquí">
+                        <label for="tipo-aqui" style="text-align: center; padding: 14px;">🪑 Servir En Tienda</label>
+                    </div>
+                </div>
+
+                <textarea id="comments" placeholder="Comentarios (opcional)" autocomplete="off"></textarea>
+                <button class="send">Enviar Pedido por WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        const MODO_PRUEBA = false; // true = permite pedidos siempre ... false = respeta horario
+
+        /* =======================
+           VARIABLES GLOBALES
+        ======================= */
+        window.cart = [];
+        window.total = 0;
+
+        /* =======================
+           FUNCIÓN SCROLL SUAVE
+        ======================= */
+        window.scrollToSection = function (sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        /* =======================
+           FIREBASE CONFIG
+        ======================= */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {
+            getFirestore,
+            addDoc,
+            collection,
+            serverTimestamp,
+            getDocs,
+            query,
+            orderBy,
+            limit
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHYo8LYSyOqgr6tBgo9RXODH0KRwZeowQ",
+            authDomain: "live-de-eso.firebaseapp.com",
+            projectId: "live-de-eso",
+            storageBucket: "live-de-eso.firebasestorage.app",
+            messagingSenderId: "250545251960",
+            appId: "1:250545251960:web:94ad354f2650d46d32af8d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        /* =======================
+   HORARIO (CHILE - SANTIAGO)
+======================= */
+        const horario = {
+            abre: 17,
+            cierra: 23
+        };
+
+        function getHoraChile() {
+            const ahora = new Date();
+            return new Date(
+                ahora.toLocaleString("en-US", { timeZone: "America/Santiago" })
+            );
+        }
+
+        function localAbierto() {
+            if (MODO_PRUEBA) return true;
+
+            const ahoraChile = getHoraChile();
+            const hora = ahoraChile.getHours();
+            const minutos = ahoraChile.getMinutes();
+            const horaActual = hora + minutos / 60;
+
+            return horaActual >= horario.abre && horaActual < horario.cierra;
+        }
+
+
+        /* =======================
+           ACTUALIZAR ESTADO HORARIO
+        ======================= */
+        function updateHorarioBadge() {
+            const badge = document.getElementById('horarioBadge');
+            if (!badge) return;
+
+            if (localAbierto()) {
+                badge.textContent = '🟢 Abierto · Hasta las 23:00';
+                badge.classList.add('abierto');
+                badge.classList.remove('cerrado');
+            } else {
+                badge.textContent = '🔴 Cerrado por hoy · Abrimos mañana a las 17:00';
+                badge.classList.add('cerrado');
+                badge.classList.remove('abierto');
+            }
+        }
+
+
+        updateHorarioBadge();
+        setInterval(updateHorarioBadge, 60000); // Actualizar cada minuto
+
+
+        /* =======================
+           CÓDIGO PEDIDO
+        ======================= */
+        function generarCodigo() {
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            let code = "";
+            for (let i = 0; i < 6; i++) {
+                code += chars[Math.floor(Math.random() * chars.length)];
+            }
+            return code;
+        }
+
+        /* =======================
+           ENVIAR PEDIDO
+        ======================= */
+        window.sendOrder = async function (e) {
+            e.preventDefault();
+
+            const error = document.getElementById('error');
+            error.textContent = "";
+
+            if (cart.length === 0) {
+                error.textContent = "El carrito está vacío";
+                return;
+            }
+
+            if (!localAbierto()) {
+                error.textContent = "⏰ Estamos cerrados. Abrimos a las 17:00";
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const tipo = document.querySelector('input[name="tipo"]:checked').value;
+            const comments = document.getElementById('comments').value;
+
+            if (!name || !phone) {
+                error.textContent = "Completa nombre y teléfono";
+                return;
+            }
+
+            // Validar teléfono
+            if (!/^\d{9,}$/.test(phone.replace(/\D/g, ''))) {
+                error.textContent = "Teléfono no válido (mínimo 9 dígitos)";
+                return;
+            }
+
+            const codigo = generarCodigo();
+
+            // Mostrar animación de carga
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+
+            try {
+                /* ---- GUARDAR EN FIRESTORE ---- */
+                await addDoc(collection(db, "pedidos"), {
+                    codigo,
+                    fecha: serverTimestamp(),
+                    cliente: { nombre: name, telefono: phone },
+                    tipo,
+                    items: cart,
+                    total,
+                    comentarios: comments,
+                    estado: "nuevo"
+                });
+
+                /* ---- WHATSAPP ---- */
+                let msg = `Pedido (${codigo}):%0A`;
+                cart.forEach(p => {
+                    msg += `- ${p.name} ${p.size} $${p.price}%0A`;
+                });
+
+                msg += `%0ACliente: ${name}%0ATeléfono: ${phone}%0ATipo: ${tipo}`;
+                msg += `%0AComentarios: ${comments}`;
+                msg += `%0ATotal: $${total}`;
+
+                window.open(`https://wa.me/56956510930?text=${msg}`, "_blank");
+
+                // Ocultar carga y mostrar éxito
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
+
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.add('active');
+
+                // Guardar en historial
+                saveToHistory(name, cart, total);
+
+                // Resetear formulario
+                setTimeout(() => {
+                    cart = [];
+                    update();
+                    toggleCart();
+                    document.querySelector('form').reset();
+                    successMsg.classList.remove('active');
+                }, 2500);
+            } catch (err) {
+                console.error("Error al guardar:", err);
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
+                error.textContent = "Error al procesar el pedido, intenta nuevamente";
+            }
+        };
+
+        /* =======================
+           BÚSQUEDA DE PRODUCTOS
+        ======================= */
+        window.filterProducts = function () {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = '';
+                    card.classList.add('fade-in');
+                    setTimeout(() => card.classList.add('visible'), 10);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        };
+
+        /* =======================
+           SISTEMA DE RESEÑAS CON FIRESTORE
+        ======================= */
+        let selectedRating = 0;
+
+        function generateStars() {
+            const container = document.getElementById('starsRating');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'star';
+                star.textContent = '⭐';
+                star.style.cursor = 'pointer';
+                star.onclick = () => {
+                    selectedRating = i;
+                    document.querySelectorAll('#starsRating .star').forEach((s, idx) => {
+                        if (idx < i) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                };
+                container.appendChild(star);
+            }
+        }
+
+        window.openReviewsModal = function () {
+            console.log('Abriendo modal de reseñas');
+            const modal = document.getElementById('reviewsModal');
+            if (modal) {
+                generateStars();
+                loadReviews();
+                modal.classList.add('active');
+            } else {
+                console.error('Modal no encontrado');
+            }
+        };
+
+        window.closeReviewsModal = function () {
+            const modal = document.getElementById('reviewsModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+            selectedRating = 0;
+            const textarea = document.getElementById('reviewComment');
+            if (textarea) {
+                textarea.value = '';
+            }
+        };
+
+        window.submitReview = async function () {
+            console.log('Enviando reseña, puntuación:', selectedRating);
+
+            if (selectedRating === 0) {
+                alert('Selecciona una calificación');
+                return;
+            }
+
+            const textarea = document.getElementById('reviewComment');
+            const comment = textarea ? textarea.value.trim() : '';
+
+            try {
+                console.log('Guardando en Firestore...');
+                await addDoc(collection(db, "resenas"), {
+                    puntuacion: selectedRating,
+                    comentario: comment || 'Sin comentario',
+                    fecha: serverTimestamp()
+                });
+
+                console.log('Reseña guardada exitosamente');
+                alert('¡Reseña enviada! Gracias por tu opinión.');
+
+                if (textarea) {
+                    textarea.value = '';
+                }
+                selectedRating = 0;
+                generateStars();
+                loadReviews();
+
+            } catch (err) {
+                console.error("Error al guardar reseña:", err);
+                alert('Error al enviar la reseña: ' + err.message);
+            }
+        };
+
+        async function loadReviews() {
+            const list = document.getElementById('reviewsList');
+            if (!list) return;
+
+            list.innerHTML = '<p style="text-align: center; color: #999;">Cargando reseñas...</p>';
+
+            try {
+                console.log('Cargando reseñas...');
+                const reseiasQuery = query(
+                    collection(db, "resenas"),
+                    orderBy("fecha", "desc"),
+                    limit(50)
+                );
+                const querySnapshot = await getDocs(reseiasQuery);
+
+                console.log('Reseñas encontradas:', querySnapshot.size);
+
+                if (querySnapshot.empty) {
+                    list.innerHTML = '<p style="text-align: center; color: #999;">Sé el primero en dejar una reseña</p>';
+                    return;
+                }
+
+                list.innerHTML = '';
+                querySnapshot.forEach(doc => {
+                    const review = doc.data();
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+
+                    let fecha = 'Hoy';
+                    try {
+                        if (review.fecha && review.fecha.toDate) {
+                            fecha = review.fecha.toDate().toLocaleDateString('es-CL');
+                        }
+                    } catch (e) {
+                        console.error('Error al procesar fecha:', e);
+                    }
+
+                    item.innerHTML = `
+                        <div class="review-stars">${'⭐'.repeat(review.puntuacion || 0)}</div>
+                        <p class="review-text">${review.comentario || 'Sin comentario'}</p>
+                        <small style="color: #999;">${fecha}</small>
+                    `;
+                    list.appendChild(item);
+                });
+
+            } catch (err) {
+                console.error("Error al cargar reseñas:", err);
+                list.innerHTML = '<p style="text-align: center; color: #999;">Error al cargar reseñas: ' + err.message + '</p>';
+            }
+        }
+
+        /* =======================
+           HISTORIAL DE PEDIDOS
+        ======================= */
+        function saveToHistory(name, items, total) {
+            const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            const order = {
+                date: new Date().toLocaleDateString('es-CL'),
+                time: new Date().toLocaleTimeString('es-CL'),
+                name: name,
+                items: items,
+                total: total
+            };
+            history.push(order);
+            localStorage.setItem('orderHistory', JSON.stringify(history));
+        }
+
+        window.openHistoryModal = function () {
+            const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            const list = document.getElementById('historyList');
+            list.innerHTML = '';
+
+            if (history.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: #999;">No hay pedidos registrados</p>';
+            } else {
+                history.slice().reverse().forEach((order, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+                    item.style.marginBottom = '15px';
+                    let itemsHtml = '';
+                    order.items.forEach(p => {
+                        itemsHtml += `<div>• ${p.name} ${p.size} - $${p.price}</div>`;
+                    });
+                    item.innerHTML = `
+                        <div style="font-weight: 700; color: var(--rojo); margin-bottom: 5px;">${order.date} - ${order.time}</div>
+                        <div style="color: #666; margin-bottom: 8px;">Cliente: ${order.name}</div>
+                        <div style="font-size: 13px; color: #555; margin-bottom: 8px;">${itemsHtml}</div>
+                        <div style="font-weight: 700; font-size: 16px;">Total: $${order.total}</div>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+
+            document.getElementById('historyModal').classList.add('active');
+        };
+
+        window.closeHistoryModal = function () {
+            document.getElementById('historyModal').classList.remove('active');
+        };
+
+        /* =======================
+           ANIMACIONES AL SCROLL
+        ======================= */
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 50);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, section').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+
+
+
+    <!-- SCRIPT NO-MÓDULO PARA FUNCIONES DEL CARRITO -->
+    <script>
+        // Variables globales del carrito
+        let cart = [];
+        let total = 0;
+
+        // Funciones del carrito
+        function toggleCart() {
+            document.getElementById('cart').classList.toggle('active');
+        }
+
+        function add(name, group) {
+            const opt = document.querySelector(`input[name="${group}"]:checked`);
+            if (!opt) {
+                alert("Selecciona una opción");
+                return;
+            }
+            const [size, price] = opt.value.split('|');
+            cart.push({ name, size, price: Number(price) });
+            update();
+        }
+
+        function addProduct(name, group) {
+            const opt = document.querySelector(`input[name="${group}"]:checked`);
+            if (!opt) return;
+            const [size, price] = opt.value.split('|');
+            cart.push({ name, size, price: Number(price) });
+            update();
+            animateCart();
+            opt.checked = false;
+        }
+
+        function addCombo(name, price) {
+            cart.push({ name, size: "Combo", price });
+            update();
+            animateCart();
+        }
+
+        function removeItem(i) {
+            cart.splice(i, 1);
+            update();
+        }
+
+        function limpiarPedido() {
+            if (cart.length === 0) {
+                alert("El carrito ya está vacío");
+                return;
+            }
+            if (confirm("¿Estás seguro de que quieres eliminar todo el pedido?")) {
+                cart = [];
+                update();
+            }
+        }
+
+        function update() {
+            const items = document.getElementById('items');
+            items.innerHTML = '';
+            total = 0;
+
+            cart.forEach((p, i) => {
+                total += p.price;
+                items.innerHTML += `
+                    <div class="cart-item">
+                        <span>${p.name} ${p.size} $${p.price}</span>
+                        <span class="remove" onclick="removeItem(${i})">Eliminar</span>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total').textContent = total;
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function animateCart() {
+            const cartBtn = document.getElementById('cartBtn');
+            cartBtn.classList.remove('cart-animate');
+            void cartBtn.offsetWidth;
+            cartBtn.classList.add('cart-animate');
+        }
+
+        // Tema oscuro
+        const themeToggle = document.getElementById('themeToggle');
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        document.querySelectorAll("[data-include]").forEach(el => {
+            fetch(el.dataset.include)
+                .then(r => r.text())
+                .then(html => el.innerHTML = html);
+        });
+
+    </script>
+
+    <!-- MAPA DE UBICACIÓN -->
+    <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.0!2d-70.54285!3d-33.44!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665b5c5c5c5c5c5%3A0x1234567890!2sBalmaceda%20038%2C%20El%20Bosque%2C%20Santiago!5e0!3m2!1ses!2scl!4v1611111111111"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <footer style="text-align:center;padding:25px 15px;color:white;background:#222;border-top:3px solid var(--rojo);">
+        <div style="margin-bottom:15px;">
+            <h3 style="margin:0 0 10px 0;font-size:16px;">📍 UBICACIÓN</h3>
+            <p style="margin:0;font-size:14px;">Balmaceda 038, El Bosque</p>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <h3 style="margin:0 0 10px 0;font-size:16px;">📞 CONTACTO</h3>
+            <p style="margin:0;font-size:14px;">
+                <a href="tel:+56956510930" style="color:#25D366;text-decoration:none;font-weight:700;">+56 9 5651
+                    0930</a>
+            </p>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <h3 style="margin:0 0 10px 0;font-size:16px;">📱 REDES SOCIALES</h3>
+            <p style="margin:0;font-size:14px;">
+                <a href="https://www.instagram.com/sabores.de.pereira?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank" style="color:#E4405F;text-decoration:none;font-weight:700;">
+                    Instagram: @saboresdepereira
+                </a>
+            </p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);margin:15px 0;">
+        <p style="margin:0;font-size:12px;opacity:0.8;">Precios sujetos a cambios · Imágenes referenciales</p>
+    </footer>
+</body>
+
+</html>
