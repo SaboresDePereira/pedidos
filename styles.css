@@ -82,7 +82,7 @@ html {
 }
 
 #combos {
-    display: none;   /* flex = ACTIVO | none = DESACTIVADO */
+    display: flex;   /* flex = ACTIVO | none = DESACTIVADO */
 }
 
 
