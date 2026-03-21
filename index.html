@@ -225,7 +225,7 @@
    HORARIO (CHILE - SANTIAGO)
 ======================= */
         const horario = {
-            abre: 17,
+            abre: 10,
             cierra: 23
         };
 
@@ -260,7 +260,7 @@
                 badge.classList.add('abierto');
                 badge.classList.remove('cerrado');
             } else {
-                badge.textContent = '🔴 Cerrado por hoy · Abrimos mañana a las 17:00';
+                badge.textContent = '🔴 Cerrado por hoy · Abrimos mañana a las 10:00';
                 badge.classList.add('cerrado');
                 badge.classList.remove('abierto');
             }
@@ -298,7 +298,7 @@
             }
 
             if (!localAbierto()) {
-                error.textContent = "⏰ Estamos cerrados. Abrimos a las 17:00";
+                error.textContent = "⏰ Estamos cerrados. Abrimos a las 10:00";
                 return;
             }
 
