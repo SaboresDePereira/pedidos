@@ -10,6 +10,15 @@
 </head>
 
 <body>
+    <script>
+        // Modo construcción: cambia a false para desactivar la redirección
+        const CONSTRUCCION_ACTIVA = true;
+
+        // Si el modo construcción está activo y estamos en index, redirige.
+        if (CONSTRUCCION_ACTIVA && window.location.pathname.endsWith('index.html') || CONSTRUCCION_ACTIVA && window.location.pathname.endsWith('/')) {
+            window.location.href = 'construccion.html';
+        }
+    </script>
 
     <button class="theme-toggle" id="themeToggle" title="Cambiar tema">🌙</button>
 
