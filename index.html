@@ -11,8 +11,8 @@
 
 <body>
     <script>
-        // Modo construcción: cambia a false para desactivar la redirección
-        const CONSTRUCCION_ACTIVA = true;
+        // Modo construcción: cambia a false para desactivar la redirección y true para hacer funcionar
+        const CONSTRUCCION_ACTIVA = false;
 
         // Si el modo construcción está activo y estamos en index, redirige.
         if (CONSTRUCCION_ACTIVA && window.location.pathname.endsWith('index.html') || CONSTRUCCION_ACTIVA && window.location.pathname.endsWith('/')) {
@@ -24,7 +24,7 @@
 
     <nav>
         <div class="nav-container">
-            <button style="display: none;" class="nav-btn" onclick="scrollToSection('combos')">🔥 Combos</button>
+            <button class="nav-btn" onclick="scrollToSection('combos')">🔥 Combos</button>
             <button class="nav-btn" onclick="scrollToSection('nuevos')">🌎 Nuevos</button>
             <button class="nav-btn" onclick="scrollToSection('burguermenu')">🍔 Burguer Menu</button>
             <button class="nav-btn" onclick="scrollToSection('hamburguesas')">🍔 Hamburguesas</button>
@@ -86,10 +86,28 @@
         </div>
     </div>
 
+    <!-- MODAL PARA OPCIONES ADICIONALES -->
+    <div class="modal" id="extraOptionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🍟 Elige tu acompañamiento</h2>
+                <button class="close-modal" onclick="closeExtraOptionsModal()">✕</button>
+            </div>
+            <div class="extra-options">
+                <button class="option-btn" onclick="selectExtraOption('con Papas Fritas')">🍟 Con Papas Fritas</button>
+                <button class="option-btn" onclick="selectExtraOption('con Bebida')">🥤 Con Bebida</button>
+            </div>
+        </div>
+    </div>
+
     <header>
-        <img src="TFG.png"
-            alt="Sabores de Pereira">
+        <img src="TFG.png" alt="Sabores de Pereira">
         <h1>SABORES DE PEREIRA</h1>
+        <div class="country-flags">
+            <span class="flag">🇨🇴</span>
+            <span class="flag">🇨🇱</span>
+            <span class="flag">🇻🇪</span>
+        </div>
         <p>Hamburguesas • Completos • Papas</p>
         <div class="horario-badge" id="horarioBadge">⏰ Abierto: 17:00 - 23:00</div>
         <p style="margin-top:6px;font-size:14px;">
@@ -612,6 +630,91 @@
         document.querySelectorAll('.card, section').forEach(el => {
             observer.observe(el);
         });
+
+        /* =======================
+           FUNCIONES PARA OPCIONES ADICIONALES
+        ======================= */
+        let pendingProduct = null; // Para almacenar el producto pendiente
+
+        window.openExtraOptionsModal = function (name, group, optionsType = 'acompanamiento') {
+            pendingProduct = { name, group, optionsType };
+            updateExtraOptionsModal(optionsType);
+            document.getElementById('extraOptionsModal').classList.add('active');
+        };
+
+        window.closeExtraOptionsModal = function () {
+            document.getElementById('extraOptionsModal').classList.remove('active');
+            if (pendingProduct) {
+                // Desmarcar el radio button si no se seleccionó nada
+                const opt = document.querySelector(`input[name="${pendingProduct.group}"]:checked`);
+                if (opt) opt.checked = false;
+            }
+            pendingProduct = null;
+        };
+
+        function updateExtraOptionsModal(optionsType) {
+            const modalHeader = document.querySelector('#extraOptionsModal .modal-header h2');
+            const optionsContainer = document.querySelector('.extra-options');
+
+            if (optionsType === 'acompanamiento') {
+                modalHeader.textContent = '🍟 Elige tu acompañamiento';
+                optionsContainer.innerHTML = `
+                    <button class="option-btn" onclick="selectExtraOption('con Papas Fritas')">🍟 Con Papas Fritas</button>
+                    <button class="option-btn" onclick="selectExtraOption('con Bebida')">🥤 Con Bebida</button>
+                `;
+            } else if (optionsType === 'bebida') {
+                modalHeader.textContent = '🥤 Elige el tamaño de tu bebida';
+                // Obtener el precio base del producto seleccionado
+                const opt = document.querySelector(`input[name="${pendingProduct.group}"]:checked`);
+                const basePrice = opt ? Number(opt.value.split('|')[1]) : 1400;
+                optionsContainer.innerHTML = `
+                    <button class="option-btn" onclick="selectExtraOption('Pequeña')">🥤 Pequeña - $${basePrice}</button>
+                    <button class="option-btn" onclick="selectExtraOption('Mediana')">🥤 Mediana - $${basePrice + 300}</button>
+                    <button class="option-btn" onclick="selectExtraOption('Grande')">🥤 Grande - $${basePrice + 600}</button>
+                `;
+            } else if (optionsType === 'salsa') {
+                modalHeader.textContent = '🍅 Elige tu salsa';
+                optionsContainer.innerHTML = `
+                    <button class="option-btn" onclick="selectExtraOption('con Salsa de Tomate')">🍅 Salsa de Tomate</button>
+                    <button class="option-btn" onclick="selectExtraOption('con Mayonesa')">🧈 Mayonesa</button>
+                    <button class="option-btn" onclick="selectExtraOption('con Ketchup')">🍅 Ketchup</button>
+                `;
+            }
+            // Puedes agregar más tipos aquí
+        }
+
+        window.selectExtraOption = function (option) {
+            if (!pendingProduct) return;
+
+            const { name, group, optionsType } = pendingProduct;
+            const opt = document.querySelector(`input[name="${group}"]:checked`);
+            if (!opt) return;
+
+            const [baseSize, basePrice] = opt.value.split('|');
+            let finalPrice = Number(basePrice);
+            let finalName = `${name} ${baseSize} ${option}`;
+
+            // Ajustar precios según la opción seleccionada
+            if (optionsType === 'bebida') {
+                if (option === 'Pequeña') {
+                    finalPrice = Number(basePrice); // precio base
+                } else if (option === 'Mediana') {
+                    finalPrice = Number(basePrice) + 300; // +$300
+                } else if (option === 'Grande') {
+                    finalPrice = Number(basePrice) + 600; // +$600
+                }
+            }
+            // Para otros tipos, mantener precio base
+
+            cart.push({ name: finalName, size: "", price: finalPrice });
+            update();
+            animateCart();
+
+            // Reset radio button
+            opt.checked = false;
+
+            closeExtraOptionsModal();
+        };
     </script>
 
 
@@ -653,6 +756,18 @@
             cart.push({ name, size: "Combo", price });
             update();
             animateCart();
+        }
+
+        function addComboSelection(comboTitle, groupName, details) {
+            const opt = document.querySelector(`input[name="${groupName}"]:checked`);
+            if (!opt) {
+                alert('Selecciona primero el tipo de completo para el combo.');
+                return;
+            }
+            const [choice, price] = opt.value.split('|');
+            const fullName = `${comboTitle} - ${choice} + ${details}`;
+            addCombo(fullName, Number(price));
+            opt.checked = false;
         }
 
         function removeItem(i) {
@@ -753,7 +868,7 @@
         </div>
 
         <hr style="border:none;border-top:1px solid rgba(255,255,255,0.2);margin:15px 0;">
-        <p style="margin:0;font-size:12px;opacity:0.8;">Precios sujetos a cambios · Imágenes referenciales</p>
+        <p style="margin:0;font-size:12px;opacity:0.8;"> · </p>
     </footer>
 </body>
 

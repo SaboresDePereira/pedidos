@@ -3,26 +3,38 @@
         <h2>🔥 ¡Combos Especiales! 🔥</h2>
 
         <div class="card">
-            <h3>Combo Cheeseburger</h3>
-            <p>🍔 Cheeseburger + Papas + Bebida</p>
-            <button onclick="addCombo('Combo Cheeseburger + Papas + Bebida',7900)">
-                Agregar $7.900
+            <h3>Combo 1 - Tamaño Normal</h3>
+            <p>1 completo (Italiano o Completo) + Papas Fritas 120 gr + 1 Bebida Express</p>
+            <div class="options">
+                <input type="radio" id="combo1-italiano" name="combo1-opcion" value="Completo Italiano|4200">
+                <label for="combo1-italiano">Completo Italiano</label>
+                <input type="radio" id="combo1-completo" name="combo1-opcion" value="Completo Completo|4200">
+                <label for="combo1-completo">Completo Completo</label>
+            </div>
+            <button onclick="addComboSelection('Combo 1', 'combo1-opcion', 'Papas Fritas 120gr + 1 Bebida Express')">
+                Agregar $4.200
             </button>
         </div>
         <br>
         <div class="card">
-            <h3>Combo Balmaceda</h3>
-            <p>🍔 Balmaceda + Papas + Bebida</p>
-            <button onclick="addCombo('Combo Balmaceda + Papas + Bebida',8500)">
-                Agregar $8.500
+            <h3>Combo 2 - Tamaño Grande</h3>
+            <p>1 completo (Italiano o Completo) + Papas Fritas 120 gr + 1 Bebida Express</p>
+            <div class="options">
+                <input type="radio" id="combo2-italiano" name="combo2-opcion" value="Completo Italiano|5000">
+                <label for="combo2-italiano">Completo Italiano</label>
+                <input type="radio" id="combo2-completo" name="combo2-opcion" value="Completo Completo|5000">
+                <label for="combo2-completo">Completo Completo</label>
+            </div>
+            <button onclick="addComboSelection('Combo 2', 'combo2-opcion', 'Papas Fritas 120gr + 1 Bebida Express')">
+                Agregar $5.000
             </button>
         </div>
         <br>
         <div class="card">
-            <h3>Combo Completo + Papas</h3>
-            <p>🌭 Completo + Papas grandes + Bebida</p>
-            <button onclick="addCombo('Combo Completo + Papas Grandes + Bebida',6900)">
-                Agregar $6.900
+            <h3>Combo 3 - Tamaño Grande</h3>
+            <p>Papas Fritas 600 gr + 2 Bebidas Express</p>
+            <button onclick="addCombo('Combo 3 - Papas Fritas 600gr + 2 Bebidas Express', 6500)">
+                Agregar $6.500
             </button>
         </div>
     </section>
